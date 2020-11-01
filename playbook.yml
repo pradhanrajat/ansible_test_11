@@ -15,11 +15,9 @@
       copy:
         src: index.html
         dest: /var/www/html/
-    - name: open port for httpd
-      firewalld:
-      port: 80/tcp
+    - firewalld:
       zone: public
+      service: http
+      permanent: true
       state: enabled
-    - name: reload firewall
-      command: firewall-cmd --reload
 ...
