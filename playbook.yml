@@ -15,9 +15,8 @@
       copy:
         src: index.html
         dest: /var/www/html/
-    - firewalld:
-      zone: public
-      service: http
-      permanent: true
-      state: enabled
+    - name: Allow http/https
+      command: firewall-cmd --zone=dmz --permanent --add-service=http --add-service=https
+    - name: Bounce firewalld
+      service: name=firewalld state=restarted
 ...
